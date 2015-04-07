@@ -1,0 +1,42 @@
+
+Navbar : green
+panel-heading : #f5f5f5;
+btn-primary : #33FF99
+
+#009933
+
+
+panel-primary : Border color : #f5f5f5
+
+
+hr{margin-top:5px;margin-bottom:10px;border:5;
+
+
+typeahead
+
+----
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#000}input,button,select,texta
+
+Changed background-color from #fff to #000
+color:#333
+
+----
+
+handsontable css:
+.handsontable td
+background-color: #000; (changed from #FFF)
+
+"Helvetica Neue",Helvetica,Arial,sans-serif (changed from sans-serif)
+
+.handsontable th {
+  background-color: #33FF99;  //#EEE;
+  color: #222;  (color changed to #000)
+
+
+.handsontableInput {
+Changed to: font-family:Helvetica Neue,Helvetica,Arial,sans-serif
+From: font-family:Arial, Helvetica, sans-serif;
+
+
+Tabs - Color change
+>li.active>a:focus{color:#555;cursor:default;background-color:#fff;border:1px solid #ddd;border-

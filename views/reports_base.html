@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+	<style type='text/css'>
+	  .normal-font{
+	    font-family:Helvetica Neue,Helvetica,Arial,sans-serif
+		font-size: 12px;
+		color: black;
+	  }
+	  
+	  .bold-green-font {
+		font-weight: bold;
+		color: green;
+	  }
+
+	  .bold-font {
+		font-weight: bold;
+	  }
+
+	  .right-text {
+		text-align: right;
+	  }
+
+	  .large-font {
+		font-size: 15px;
+	  }
+
+	  .italic-darkblue-font {
+		font-style: italic;
+		color: darkblue;
+		text-align: center;
+	  }
+
+	  .italic-purple-font {
+		font-style: italic;
+		color: purple;
+	  }
+
+	  .underline-blue-font {
+		text-decoration: underline;
+		color: blue;
+	  }
+
+	  .gold-border {
+		border: 3px solid gold;
+	  }
+
+	  .deeppink-border {
+		border: 3px solid deeppink;
+	  }
+
+	  .orange-background {
+		background-color: orange;
+	  }
+
+	  .orchid-background {
+		background-color: orchid;
+	  }
+
+	  .beige-background {
+		background-color: beige;
+	  }
+
+	</style>
+
+	
+{% endblock %}
+
+{% block content %}
+
+	<div class="row">
+		{% block criteria %}
+		{% endblock %}
+	</div>
+
+	<div class="row">
+		<div id="ReportName"></div>
+		<br />
+		<div id="report_div" style="height: 400px"></div>
+	</div>
+
+	<br />
+	
+{% endblock %}
+

@@ -1,0 +1,17 @@
+cron:
+- description: Update Daily Price, NASDAQ
+  url: /admin/UpdatePrice?Exchange=NASDAQ
+  schedule: every day 09:00
+  timezone: America/New_York
+- description: Update Daily Price, NYSE 
+  url: /admin/UpdatePrice?Exchange=NYSE
+  schedule: every day 09:05
+  timezone: America/New_York
+- description: Update Analyst Rating Changes 
+  url: /admin/LoadRatings
+  schedule: every day 09:10
+  timezone: America/New_York
+- description: Update Earning Surprises
+  url: /admin/LoadEarningSurprises
+  schedule: every day 09:15
+  timezone: America/New_York

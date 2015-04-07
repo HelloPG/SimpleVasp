@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+
+	
+{% block Menu_Section %}
+
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><B>My Stocks</B><span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					{% for us in userStocks %}
+						<li><a href='javascript:setCurrentTicker("{{us.ticker}}", "{{us.pseudoname}}", "{{us.companyName}}")'>
+								{{ us.ticker }}-{{ us.companyName }}
+						</a></li>
+					{% endfor %}
+				</ul>
+			</li>
+			
+{% endblock %}
+
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-5">
+				<label class="radio-inline">
+				  <input type="radio" name="vaspType" id="crowdVasp" value="crowdVasp" onclick="crowdVaspSelected(this);"> Crowd Spreadsheet
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="vaspType" id="myVasp" value="myVasp" onclick="myVaspSelected(this);"> My Spreadsheet (Login Required)
+				</label>		
+		</div>
+			
+		<div class="col-sm-2 text-right">
+			<div id="custom-templates">		
+				<input id="ticker" class="typeahead text-uppercase" type="text" placeholder="Stock Symbol">
+			</div>			
+		</div>
+
+		<div id="companyName" class="col-sm-4 text-left" style="font-size:150%;">
+		</div>
+		
+
+	</div>
+	
+	<br />
+	<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+		<li ><a href="#coe" data-toggle="tab"><B><div style="color:white">Cost of Equity(COE)</div></B></a></li>
+		<li class="active"><a href="#fcfe" data-toggle="tab"><B><div style="color:white">Free Cash Flow(FCF)</div></B></a></li>
+		<li><a href="#results" data-toggle="tab"><B><div style="color:white">Valuation Results</div></B></a></li>
+		<li><a href="#chart" data-toggle="tab"><B><div style="color:white">Visualization Chart</div></B></a></li>
+		<li><a href="#compare" data-toggle="tab"><B><div style="color:white">Compare Related Stocks</div></B></a></li>
+	</ul>
+	
+	<!----my-tab-content---->  		
+	<div id="my-tab-content" class="tab-content">
+	
+		<div class="tab-pane active" id="fcfe">
+			<br />
+			<div class="row">
+				<div id="PublicUrl" class="col-sm-12">
+				</div>
+			</div>
+			<br />
+			
+			<div class="row">
+				<div class="col-sm-8">
+					<div id="FreeCashFlow" style="height: 385px;"></div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-4 text-left">
+					*** Fields with white background can be edited.
+				</div>
+				
+				<div class="col-sm-3 text-center">
+					<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id="SaveLink" type="button" class="btn btn-primary" onclick="javascript:saveVasp();">
+						Save my Spreadsheet
+					</button>	
+				</div>
+				
+				<div id="FM_Label" class="col-sm-5 text-left">
+					Forecast Methods - <br />
+					A: Last year's value,&nbsp; 
+					B: 5 year Average,&nbsp;
+					C: Analyst Estimates
+				</div>	
+			</div>
+			
+			<br />
+		</div>
+		
+		<div class="tab-pane" id="coe">
+			<br />
+						
+			<div class="row">
+		
+				<div class="col-sm-6">
+					<div id="CostOfEquity" style="height: 150px"></div>
+					<sup>*</sup>If &#946;<sub>a</sub>=N/A, assume &#946;<sub>a</sub>=1
+				</div>
+				
+				<div class="col-sm-6">
+					<b>Capital Asset Pricing Model(CAPM)</b>
+					<br /><br />
+						<b>r<sub>a</sub> = r<sub>f</sub> + &#946;<sub>a</sub> &times; (r<sub>m</sub> - r<sub>f</sub>)</b>
+					<br /><br />
+					r<sub>a</sub> = Return on Asset/Security
+					<br />
+					r<sub>f</sub> = Risk Free Rate
+					<br />
+					&#946;<sub>a</sub> = Asset/Security Beta
+					<br />
+					r<sub>m</sub> = Expected Market Return
+				</div>	
+<!--
+				<div class="col-sm-4">					
+				</div>
+-->					
+			</div>
+			<br /><br /><br />
+			
+		</div>
+		
+		<div class="tab-pane" id="results">
+			<br />				
+			<div id="Result" style="height: 170px;"></div>
+			<br /><br />
+			Assumptions: <br />
+			1. After year 5, FCF will be stable for next 15 years and it will be same as FCF<sub>last</sub>(FCF<sub>5</sub>)
+			<br />
+			2. Expected (stable) life of a company is 5 + 15 = 20 years.
+			<br />
+		</div>
+		<br />
+		
+		<div class="tab-pane" id="chart">
+			<br />				
+			<div id="visualization_chart_div"></div>
+			<br /><br />
+		</div>
+		
+		<div class="tab-pane" id="compare">
+			<br />		
+			***Click on column header to sort data.			
+			<div id="Compare"></div>	
+			<br /><br />
+			<div id="compare_chart_div"></div>
+			<br /><br />
+		</div>
+		
+	</div>
+	<!----my-tab-content----> 
+	
+{% endblock %}
+
+{% block Javascript_Section %}
+
+	<script src="/assets/js/VASP_Handsontable_coe.js"></script>
+	<script src="/assets/js/VASP_Handsontable_result.js"></script>
+	<script src="/assets/js/VASP_Handsontable_fcf.js"></script>	
+	<script src="/assets/js/VASP_Handsontable_compare.js"></script>	
+
+	<script src="/assets/js/handlebars.js"></script>
+	<script src="/assets/js/typeahead.bundle.js"></script>
+	<script src="/assets/js/typeahead-vasp.js"></script>
+	
+	<script src="/assets/js/VASP_main.js"></script>	
+	<script>
+		$('#tabs').tab();
+
+		// Clear stock ticker
+		$('.typeahead').val("");
+
+		// Default - Select 'crowdVasp'
+		$("#crowdVasp").attr("checked",true);
+		
+		crowdVaspSelected();
+		
+		var userName = "{{ userName }}";
+		var pubTicker = "{{ ticker }}";
+		var pubToken = "{{ token }}";
+		var pubCompanyName = "{{ companyName }}";
+
+		// If 'userName' is null, 
+		// disable 'myVasp' radio button and hide 'SaveLink'
+		if (userName == '' || pubTicker != ''){
+			$("#myVasp").attr("disabled", true);
+			$("#SaveLink").hide();
+			$("#FM_Label").hide();
+		}			
+		// else enable 'myVasp' radio button
+		else{
+			$("#myVasp").attr("disabled", false);
+			
+			if($('#myVasp').is(':checked')){
+				$("#SaveLink").show();
+				$("#FM_Label").show();
+			}
+		}
+		
+	</script>
+
+	<script src="/assets/js/jsapi.js"></script>	
+		
+	<script type="text/javascript">
+
+      // Load the Visualization API and the core chart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(initChart);
+
+    </script>
+	
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+	<style type='text/css'>
+	  .normal-font{
+	    font-family:Helvetica Neue,Helvetica,Arial,sans-serif
+		font-size: 12px;
+		color: black;
+	  }
+	  
+	  .bold-green-font {
+		font-weight: bold;
+		color: green;
+	  }
+
+	  .bold-font {
+		font-weight: bold;
+	  }
+
+	  .right-text {
+		text-align: right;
+	  }
+
+	  .large-font {
+		font-size: 15px;
+	  }
+
+	  .italic-darkblue-font {
+		font-style: italic;
+		color: darkblue;
+		text-align: center;
+	  }
+
+	  .italic-purple-font {
+		font-style: italic;
+		color: purple;
+	  }
+
+	  .underline-blue-font {
+		text-decoration: underline;
+		color: blue;
+	  }
+
+	  .gold-border {
+		border: 3px solid gold;
+	  }
+
+	  .deeppink-border {
+		border: 3px solid deeppink;
+	  }
+
+	  .orange-background {
+		background-color: orange;
+	  }
+
+	  .orchid-background {
+		background-color: orchid;
+	  }
+
+	  .beige-background {
+		background-color: beige;
+	  }
+
+	</style>
+
+	
+{% endblock %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="col-sm-2">	
+			Available Reports: <br /><br />
+			<div class="btn-group-vertical">
+				<button id="uvReport" type="button" class="btn btn-default" autofocus>Undervalued Stocks</button>
+				<button id="ovReport" type="button" class="btn btn-default">Overvalued Stocks</button>
+				<button id="fvReport" type="button" class="btn btn-default">Fairvalued Stocks</button>
+				<button id="ratingsReport" type="button" class="btn btn-default">Analyst Rating Changes</button>
+				<button id="uvRatingsReport" type="button" class="btn btn-default">Upgrades-UnderValued Stocks</button>
+				<button id="ovRatingsReport" type="button" class="btn btn-default">Downgrades-OverValued Stocks</button>
+		</div>
+		</div>
+			
+		<div class="col-sm-10">
+			<div id="ReportName"></div>
+			<br />
+			<div id="report_div" style="height: 400px"></div>
+		</div>
+		
+	</div>
+
+	<br />
+	
+{% endblock %}
+
+{% block Javascript_Section %}
+	
+	<script src="/assets/js/jsapi.js"></script>		
+		
+	<script type="text/javascript">
+
+		function initReport() {
+			report = new google.visualization.Table(document.getElementById('report_div'));
+		}
+
+		// Load the Visualization API and the table package.
+		google.load("visualization", "1", {packages:["table"]});
+
+		// Set a callback to run when the Google Visualization API is loaded.
+		google.setOnLoadCallback(initReport);
+
+    </script>
+
+	<script src="/assets/js/VASP_Reports.js"></script>		
+		
+{% endblock %}

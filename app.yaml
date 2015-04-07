@@ -1,0 +1,45 @@
+application: simplevasp
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /assets/xml
+  static_dir: assets/xml
+  mime_type: "text/xml"
+  
+- url: /assets/css
+  static_dir: assets/css
+  mime_type: "text/css"
+  
+- url: /assets/js
+  static_dir: assets/js
+  mime_type: "text/js"
+
+- url: /assets/jpg
+  static_dir: assets/jpg
+  mime_type: "image/jpg"
+  
+- url: /assets/gif
+  static_dir: assets/gif
+  mime_type: "image/gif"
+  
+- url: /assets
+  static_dir: assets
+
+- url: /admin/.*
+  script: admin.application
+  login: admin
+  
+- url: /.*
+  script: main.application
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+- name: numpy
+  version: latest
+  

@@ -1,0 +1,56 @@
+{% extends "reports_base.html" %}
+
+
+{% block criteria %}
+
+    <div class="row">
+        <div class="col-sm-3 text-left">
+            <B>Report: Top 100 Stocks</B>
+        </div>
+
+        <div class="col-sm-5 text-left">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Value Type:</B>
+            <label class="radio-inline">
+              <input type="radio" name="valueType" id="vt_uv" value="vt_uv">Undervalued
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="valueType" id="vt_ov" value="vt_ov">Overvalued
+            </label>
+        </div>
+
+        <div class="col-sm-2 text-left">
+            <button id="Submit" type="button" class="btn btn-primary" onclick="javascript:fetchTop();">
+                Fetch Data
+            </button>
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block Javascript_Section %}
+
+	<script src="/assets/js/jsapi.js"></script>
+
+	<script type="text/javascript">
+
+		function initReport() {
+			report = new google.visualization.Table(document.getElementById('report_div'));
+		}
+
+		// Load the Visualization API and the table package.
+		google.load("visualization", "1", {packages:["table"]});
+
+		// Set a callback to run when the Google Visualization API is loaded.
+		google.setOnLoadCallback(initReport);
+
+    </script>
+
+	<script src="/assets/js/Report_Top100.js"></script>
+
+{% endblock %}
+

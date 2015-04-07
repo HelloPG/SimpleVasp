@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+	
+	<div class="row">
+			<a class="navbar-text navbar-center" style="color:#FFF"
+						href="mailto:valuation.spreadsheet@gmail.com"><B><U>Contact/Email</U></B>
+			</a>
+	</div>
+	<br />
+	<div class="row">
+			<div class="col-xs-6">
+				<B>Overview</B><br />
+				<p class="text-justify">
+					ValuationCompass is a tool for individual investors. 
+					Individual investors often have difficulty in estimating equity prices/values. 
+					ValuationCompass makes it easy to prepare your own valuation spreadsheet. 
+					You can compare your spreadsheet with 'Crowd' spreadsheet 
+					which is average of estimates by all the other users.
+					<br /><br />
+					A GPS gives the exact co-ordinates as opposed to a Compass which provides approximate location awareness.
+					Hence the name - ValuationCompass. The tool does not claim to provide exact value of stocks. 
+					<br /><br />
+					ValuationCompass is not a substitute to forecasts by equity analysts. 
+					Valuation analysis that equity analysts do is much more involved than ValuationCompass and takes into account many more variables.
+					ValuationCompass' goal is to provide a context within which company valuations exist.
+					<br /><br />
+
+
+				</p>
+				<br /><br />
+
+				<B>Other Resources for Valuation</B><br />
+				<p class="text-justify">
+					<a target="_blank" href="http://aswathdamodaran.blogspot.com/">
+						Blog by Prof. Aswath Damodaran
+					</a>
+					<br />
+					<a target="_blank" href="http://aswathdamodaran.blogspot.ca/2014/01/its-personal-my-experiments-with-online.html">
+						Valuation Classes by Prof. Aswath Damodaran
+					</a>
+					<br />
+					<a target="_blank" href="http://www.caperatio.com/">
+						Cape Ratio Calculator
+					</a>
+					<br />
+					<a target="_blank" href="http://www.reddit.com/r/SecurityAnalysis/">
+						Reddit Security Analysis
+					</a>
+					<br />
+					<a target="_blank" href="http://www.grahaminvestor.com/
+						The Graham Investor
+					</a>
+					<br />
+					<a target="_blank" href="http://www.magicformulainvesting.com/">
+						Magic Formula Investing
+					</a>
+					
+				</p>				
+				<br /><br />
+			</div>
+			
+			<div class="col-xs-6">
+				<B>Methodology</B>
+				<p class="text-justify">
+					<B>FCFE (Future Cash Flows to Equity):</B> 
+					Measure of how much cash can be paid to the equity shareholders of the company
+					after all expenses and reinvestment are paid.<br />
+					
+					<B>CAPM (Capital Asset Pricing Model):</B> 
+					Provides risk adjusted, expected rate of return for a stock. 
+					This rate of return is considered as Cost of Equity(COE).
+					It is used to discount future cash flows and 
+					calculate present value of sum of all those cash flows. 
+					<br /><br />
+					ValuationCompass uses cash flows for only next 20 years because when
+					companies buy or sell other companies, they typically use profilt multiplier
+					of 20 or less. In reality, a Utility company may have longer, more stable lifespan than that of 
+					a Technology company. 
+					<br /><br />
+					User estimates cash flows for next 5 years.
+					After that for the next 15 years,
+					yearly cash flow is assumed to be same and equal to 5th year cash flow. 
+					In reality, cash flows will either increase or decrease but it is impossible 
+					to forecast those changes. Sum of discounted cash flows for last 15 years
+					is calulated using 'Present Value of Annuity' formula where annuity is equal to 5th year cash flow. 
+					<br /><br />
+					Present Value (in year 6) of cash flows for next 15 years = 
+					FCF<sub>5</sub>&times;[1-(1+COE)<sup>-15</sup>]&divide;COE
+					<br /><br />
+					Sum of all the discounted cash flows (for 5+15 years) = 
+					&#931;( FCF<sub>n</sub>/(1+COE)<sup>n</sup> )
+					<br /><br />
+					Intrinsic Value of Stock = 	Sum of all the discounted cash flows / Number Of Shares
+				</p>				
+				<br /><br />
+				
+			</div>
+
+	</div>	
+
+	
+{% endblock %}
